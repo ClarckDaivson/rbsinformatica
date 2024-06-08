@@ -220,44 +220,17 @@
 
               </div>
                 <div class="panel-body">
-                    <form method="post">
-                      <?php
-                            if ((!empty($nome)) && (!empty($telefone)) && (!empty($email)) && (!empty($motivo)) && (!empty($mensagem))) {
-                            $nome = addslashes($_POST['nome']);
-                            $telefone = addslashes($_POST['telefone']);
-                            $email = addslashes($_POST['email']);
-                            $motivo = addslashes($_POST['motivo']);
-                            $mensagem = addslashes($_POST['mensagem']);
-
-
-
-                            $para = "daivsonatanaele@gmail.com"; //quem vai receber o e-mail
-                            $assunto = "Contato"; //assunto
-                            $corpo = "Nome: " .$nome. " - Telefone: " .$telefone. " - Email: " .$email. "- Motivo: " .$motivo. " - Mensagem: " .$mensagem; //corpo da mensagem
-                            $cabecalho ="From:daivsonatanaele@gmail.com"."\r\n"."Reply-To: ".$email."\r\n"."X-Mailer: PHP/".phpversion(); // e-mail que está hospedado
-
-                            mail($para,$assunto, $corpo, $cabecalho);
-
-                            ?>
-                              <div class="alert alert-primary">
-                                <strong>E-mail enviado com sucesso</strong>
-                              </div>
-
-                            <?php
-
-
-                      }
-                      ?>
-                       <div class="row">
+                    <form class="form-horizontal" method="post" action="index.php#formulario" method="post" role="form" data-toggle="validator">
+                     <div class="row">
                          <div class="col-sm-6">
                            <div class="form-group">
-                             <label for="nome">Nome:</label>
+                             <label for="nome">Nome*:</label>
                              <input type="text" name="nome" id="nome" class="form-control" placeholder="Ex: José">
                            </div>
                          </div>
                          <div class="col-sm-6">
                            <div class="form-group">
-                             <label for="telefone">Telefone:</label>
+                             <label for="telefone">Telefone*:</label>
                              <input type="tel" name="telefone" id="telefone"maxlength="15" class="form-control" placeholder="11 954595090" onkeyup="handlePhone(event)">
                            </div>
                          </div>
@@ -265,21 +238,28 @@
                       <div class="row">
                         <div class="col-sm-6">
                           <div class="form-group">
-                            <label for="email">E-mail:</label>
+                            <label for="email">E-mail*:</label>
                             <input type="text" name="email" id="email" class="form-control" required="required" placeholder="jose@terra.com.br">
                           </div>
                         </div>
                         <div class="col-sm-6">
                           <div class="form-group">
-                            <label for="motivo">Motivo:</label>
-                            <input type="text" name="motivo" id="motivo" class="form-control" placeholder="Ex: impressora Quebrada">
+                            <label class="control-label col-sm-3">Assunto*:</label>
+                            <select class="form-control" name="assunto" required>
+                              <option value="" selected="selected" disabled="disabled"> -- Escolha uma opção --</option>
+                              <option value="contato">Contato</option>
+                              <option value="vendas">Vendas</option>
+                              <option value="financeiro">Financerio</option>
+                              <option value="informacoes">Informações</option>
+                            </select>
+                            <div class="help-block with-errors"></div>
                           </div>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-sm-12">
-
-                          <textarea name="mensagem" id="mensagem" cols="20"  rows="10" class="form-control" placeholder="Ex: Minha Impressora da marca y e modelo, não está imprimindo colorido somente preto com algumas falhas na impressão."></textarea>
+                          <label class="control-label col-sm-3">Mensagem*:</label>
+                          <textarea name="mensagem" id="mensagem" cols="20"  rows="10" class="form-control" placeholder=""></textarea>
                           <input type="submit" value="Enviar" class="btn btn-primary w-100">
                         </div>
 
