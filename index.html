@@ -220,7 +220,34 @@
 
               </div>
                 <div class="panel-body">
-                    <form method="post" action="sendmail.php">
+                    <form method="post">
+                      <?php
+                            if ((!empty($nome)) && (!empty($telefone)) && (!empty($email)) && (!empty($motivo)) && (!empty($mensagem))) {
+                            $nome = addslashes($_POST['nome']);
+                            $telefone = addslashes($_POST['telefone']);
+                            $email = addslashes($_POST['email']);
+                            $motivo = addslashes($_POST['motivo']);
+                            $mensagem = addslashes($_POST['mensagem']);
+
+
+
+                            $para = "daivsonatanaele@gmail.com"; //quem vai receber o e-mail
+                            $assunto = "Contato"; //assunto
+                            $corpo = "Nome: " .$nome. " - Telefone: " .$telefone. " - Email: " .$email. "- Motivo: " .$motivo. " - Mensagem: " .$mensagem; //corpo da mensagem
+                            $cabecalho ="From:daivsonatanaele@gmail.com"."\r\n"."Reply-To: ".$email."\r\n"."X-Mailer: PHP/".phpversion(); // e-mail que está hospedado
+
+                            mail($para,$assunto, $corpo, $cabecalho);
+
+                            ?>
+                              <div class="alert alert-primary">
+                                <strong>E-mail enviado com sucesso</strong>
+                              </div>
+
+                            <?php
+
+
+                      }
+                      ?>
                        <div class="row">
                          <div class="col-sm-6">
                            <div class="form-group">
